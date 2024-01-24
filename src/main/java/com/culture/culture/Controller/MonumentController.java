@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.culture.culture.Service.MonumentService;
 
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/culturelle/monument/")
 public class MonumentController {
 
@@ -30,11 +30,11 @@ public class MonumentController {
 	private MonumentService monumentService;
 
 	@GetMapping
-	public String getAllMonuments() {
-//		List<Monument> monuments = this.monumentService.getAll();
-//		return monuments.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("No monument available")
-//				: ResponseEntity.ok(monuments);
-		return "x";
+	public ResponseEntity<?> getAllMonuments() {
+		List<Monument> monuments = this.monumentService.getAll();
+		return monuments.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("No monument available")
+				: ResponseEntity.ok(monuments);
+
 	}
 
 	@GetMapping("/{id}")
